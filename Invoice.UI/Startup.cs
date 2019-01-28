@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Invoice.Integration;
+using Invoice.Integration.Xero;
+using Invoice.Integration.Xero.XeroAuthenticators;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -9,12 +12,13 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Xero.Api;
 
 namespace Invoice.UI
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IHostingEnvironment env)
         {
             Configuration = configuration;
         }
@@ -31,8 +35,16 @@ namespace Invoice.UI
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-
+            services.AddOptions();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            //TODO: Suppose to use config like: services.Configure<IXeroApiSettings>(x => Configuration.GetSection("XeroApi"));
+            //There is a bug in .net core, probably fixed in later version : https://github.com/aspnet/Docs/issues/867
+            services.AddSingleton<IXeroApiSettings>(new XeroApiSettings());
+            services.AddSingleton<AuthenticatorFacade, AuthenticatorFacadeImpl>();
+            services.AddSingleton<PublicAuthenticator>();
+            services.AddSingleton<PartnerAuthenticator>();
+            services.AddSingleton<RequestTokenStore>(new MemoryTokenStore());
+            services.AddSingleton<AccessTokenStore>(new MemoryTokenStore());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
