@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Invoice.Domain;
 using Invoice.Integration;
 using Microsoft.AspNetCore.Mvc;
 using Invoice.UI.Models;
@@ -12,10 +13,14 @@ namespace Invoice.UI.Controllers
     public class HomeController : Controller
     {
         private AuthenticatorFacade authenticator;
+        private ImportService importService;
+        private User currentUser;
 
-        public HomeController(AuthenticatorFacade authenticator)
+        public HomeController(AuthenticatorFacade authenticator, User currentUser, ImportService importService)
         {
             this.authenticator = authenticator;
+            this.currentUser = currentUser;
+            this.importService = importService;
         }
 
         public IActionResult Index()
@@ -25,16 +30,22 @@ namespace Invoice.UI.Controllers
 
         public IActionResult Connect()
         {
-            var url = authenticator.GetRequestTokenAuthorizeUrl("demo_user");
+            var url = authenticator.GetRequestTokenAuthorizeUrl(currentUser.Identifier);
             return Redirect(url);
         }
-        public ActionResult Authorize(string oauth_token, string oauth_verifier, string org)
+        public IActionResult Authorize(string oauth_token, string oauth_verifier, string org)
         {
             var accessToken = authenticator.RetrieveAndStoreAccessToken(
-                "demo_user", oauth_token, oauth_verifier);
+                currentUser.Identifier, oauth_token, oauth_verifier);
             if (accessToken == null)
                 return View("NoAuthorized");
 
+            return View();
+        }
+
+        public IActionResult Import()
+        {
+            importService.importVendors();
             return View();
         }
 

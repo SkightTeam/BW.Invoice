@@ -16,6 +16,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Invoice.Integration.Xero", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Invoice.Integration.Xero.Tests", "Invoice.Integration.Xero.Tests\Invoice.Integration.Xero.Tests.csproj", "{37652E3E-BAA9-4AAF-B58E-F1E678DF984D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Invoice.Persistent.NHibernate", "Invoice.Persistent.NHibernate\Invoice.Persistent.NHibernate.csproj", "{BFF60D33-4A2A-41BB-A160-E197B8B17776}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,6 +40,10 @@ Global
 		{37652E3E-BAA9-4AAF-B58E-F1E678DF984D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{37652E3E-BAA9-4AAF-B58E-F1E678DF984D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{37652E3E-BAA9-4AAF-B58E-F1E678DF984D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFF60D33-4A2A-41BB-A160-E197B8B17776}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFF60D33-4A2A-41BB-A160-E197B8B17776}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFF60D33-4A2A-41BB-A160-E197B8B17776}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFF60D33-4A2A-41BB-A160-E197B8B17776}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,7 +1,8 @@
-﻿@{
+﻿
+@{
     ViewData["Title"] = "Authorized";
 }
 <h2>@ViewData["Title"]</h2>
 
 <p>Authorization success, please choose action(s) below.</p>
-@Html.("Import Vendors/Accounts","Import","Home");
+@Html.ActionLink("Import Vendors/Accounts","Import","Home");

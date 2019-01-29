@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Xero.Api;
 using Xero.Api.Infrastructure.Authenticators;
+using Xero.Api.Infrastructure.Interfaces;
 
 namespace Invoice.Integration.Xero
 {
@@ -21,12 +22,15 @@ namespace Invoice.Integration.Xero
             switch (settings.AppType)
             {
                 case XeroApiAppType.Public:
-                    authenticator =
-                        serviceProvider.GetService<PublicAuthenticator>();
+                     var publicAuthenticator=   serviceProvider.GetService<PublicAuthenticator>();
+                    XeroAuthenticator = publicAuthenticator;
+                    authenticator = publicAuthenticator;
                     break;
                 case XeroApiAppType.Partner:
-                    authenticator =
+                    var partnerAuthenticator =
                         serviceProvider.GetService<PartnerAuthenticator>();
+                    XeroAuthenticator = partnerAuthenticator;
+                    authenticator = partnerAuthenticator;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(
@@ -35,6 +39,8 @@ namespace Invoice.Integration.Xero
                         $"Not supported yet.");
             }
         }
+
+        public IAuthenticator XeroAuthenticator { get; }
 
         public string GetRequestTokenAuthorizeUrl(string userId)
         {
