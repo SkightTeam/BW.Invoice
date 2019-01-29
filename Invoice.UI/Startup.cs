@@ -1,21 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Invoice.Domain;
 using Invoice.Integration;
 using Invoice.Integration.Queries;
 using Invoice.Integration.Xero;
 using Invoice.Integration.Xero.Queries;
 using Invoice.Integration.Xero.XeroAuthenticators;
+using Invoice.Persistent;
+using Invoice.Persistent.NHibernate;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using NHibernate;
 using Xero.Api;
 
 namespace Invoice.UI
@@ -51,6 +49,7 @@ namespace Invoice.UI
             services.AddSingleton<PartnerAuthenticator>();
             services.AddSingleton<RequestTokenStore>(new MemoryTokenStore());
             services.AddSingleton<AccessTokenStore>(new MemoryTokenStore());
+            services.AddSingleton<ISessionFactory>(x=>SessionProvider.Initilize());
 
             services.AddScoped<GetCurrentOrganization, XeroGetCurrentOrganization>();
             services.AddScoped<SearchAccountsInOrganization, XeroSearchAccountsInOrganization>();
@@ -60,6 +59,9 @@ namespace Invoice.UI
             services.AddScoped<ExternalRepository, XeroRepository>();
 
             services.AddScoped(provider => new User {Identifier = "DemoUser"});
+            services.AddScoped(provider =>
+                provider.GetRequiredService<ISessionFactory>().OpenSession());
+            services.AddScoped<Repository, NHibernateRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

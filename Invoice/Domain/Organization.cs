@@ -7,7 +7,7 @@ namespace Invoice.Domain
     public class Organization
     {
         public virtual int Id { get; set; }
-        public string ShortCode { get; set; }
+        public virtual string ShortCode { get; set; }
         public virtual string Name { get; set; }
         public virtual string  LegalName { get; set; }
     }

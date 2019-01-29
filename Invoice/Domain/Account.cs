@@ -7,8 +7,8 @@
             Organization = organization;
         }
         protected Account() { }
-        public virtual Organization Organization { get; private set; }
-        public virtual int Id { get; private set; }
+        public virtual Organization Organization { get; protected set; }
+        public virtual int Id { get; protected set; }
         public virtual string Code { get; set; }
         public virtual string Name { get; set; }
         public virtual string BankAccountNumber { get; set; }

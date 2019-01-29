@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Invoice.Integration.Xero\Invoice.Integration.Xero.csproj" />
+    <ProjectReference Include="..\Invoice.Persistent.NHibernate\Invoice.Persistent.NHibernate.csproj" />
     <ProjectReference Include="..\Invoice\Invoice.csproj" />
   </ItemGroup>
 
