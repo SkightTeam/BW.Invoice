@@ -50,7 +50,8 @@ The domain module is the core which included all business logic related concepts
 and defined all infrastructure functions with interfaces. Then all other modules are
 consider as implementations or providers of the core functions. 
 That is called the Onion Architecture.
-![The Onion Architecture](the onion architecture.jpg)
+
+![The Onion Architecture](the-onion-architecture.jpg)
 
 Also trying to avoid too many third party dependencies, 
 the system still instroduce some of them in order to focus on our own business 
