@@ -31,7 +31,7 @@ and replace corresponding ones in `appsettings.json` in published folder in step
 7. To simplify the first version, the database have been hard coded as Sqlite and file location `{published-folder}/Data/Invoice.sqlite`
 
 
-## Application Guid
+## Application Guide
 1. After deployed as above, when you navigate to the application website, 
 you will see the home page, and click the big blue button `Connect to Xero`
 2. You will be redirect to the Xero login page if you haven't logged in before
