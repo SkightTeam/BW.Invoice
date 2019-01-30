@@ -74,9 +74,24 @@ There are mainly 4 modules(vs projects):
 * Invoice UI (as a presentation layer to accept input and render data)
 * Invoice.Integration.Xero: implemented Integreation functions(interfaces in domain) by Xero Api SDK.
 * Invoice.Persistent.NHibernate: implemented Persistent functions(interfaces in domain) by Fluent NHibernate
-
+Here is dependency relationship between modules:
+![Modules Dependencies](packages-dependencies.png)
 The Invoice is the core module which is independent while all other modules depend on it.
 
+### Detail Design
+### Domain Model
+Domain modle itself is simple and clear, while diagram shows the Vendor and the Account reference the Organization,
+actually the Organization is their constructor's argument which means the Vendor the Account rely on the Orgnaization.
+![Domain Model Design](domain-model.png)
+
+#### External Repository and Queries
+Extenal Repository (Xero) is using Repository and Query pattern as well. 
+The queries `GetCurrentOrganization` , `SearchVendorsInOrganization` and `SearchAccountsInOrganization` are abstrction queries
+which implemented by Xero* ones calling XeroApiSDK finally, they can also be implemented without XeroApiSDK e.g. directly REST calling,
+even implemented by other party platform than Xero at all.
+![External Repository and Queries Design](external-repository-query.png)
+
+#### 
 
 ## Development Instruction
 ### Work from Source Code
@@ -103,4 +118,4 @@ or specific provider name for multiple implementations.
 * Machine.Specifications.Fakes 2.10.0
 * Machine.Specifications.Fakes.NSubstitute 2.10.0
 
-Also need install Resharper extension if want to run test from Resharper: machine.specifications.runner.resharper## Technology Debt### Test Coverage LowThe purpose of the first version is to set up main framework, so not wrote too many unit tests to cover all codes/paths. But the DI helped isolated pieces of code, that maked it easier to fullfill unit tests later### Duplicated Code in Public/Parnter AuthenticatorThe two classes have lots duplicated code, which came from Xero.Api two base authenticators design. It can be improved by rewrite Xero.Api authenticators's code.### UserId improper passed in XeroApiThe UserID has been passed through XeroCoreApi down to XeroHttpClient, and finally used to look up token in Token Store.The whole process is complicated and hidden behavior. Need improve by rework on XeroApi itself.### Hardcode Database configurationThe database configuration have been hard coded as Sqlite and `Data/invoice.sqlite` for first version.It can be easy to improve later### Importing duplicatedHaven't handled the duplicated record by check local repository if it existed before, that is catched by `TODO` in import service.
+Also need install Resharper extension if want to run test from Resharper: machine.specifications.runner.resharper## Technology Debt### Test Coverage LowThe purpose of the first version is to set up main framework, so not wrote too many unit tests to cover all codes/paths. But the DI helped isolated pieces of code, that maked it easier to fullfill unit tests later### Duplicated Code in Public/Parnter AuthenticatorThe two classes have lots duplicated code, which came from Xero.Api two base authenticators design. It can be improved by rewrite Xero.Api authenticators's code.### UserId improper passed in XeroApiThe UserID has been passed through XeroCoreApi down to XeroHttpClient, and finally used to look up token in Token Store.The whole process is complicated and hidden behavior. Need improve by rework on XeroApi itself.### Hardcode Database configurationThe database configuration have been hard coded as Sqlite and `Data/invoice.sqlite` for first version.It can be easy to improve later### Importing duplicatedHaven't handled the duplicated record by check local repository if it existed before, that is catched by `TODO` in import service.### Display Imported DataFor sake of short time, the display imported the organizations, vendors and accounts are not impplemented yet.It will invovle define the abstract query object/interface and create NHibernate's implementations which is pretty straightforward.
