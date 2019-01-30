@@ -94,7 +94,7 @@ or specific provider name for multiple implementations.
 #### Main Project's Dependencies
 * Xero.Api.Core
 * Automapper 8.0.0
-* NHibernate / Fluent NHibernate
+* NHibernate 5.1.1 / Fluent NHibernate 2.1.2
 
 #### Test Project's Dependencies
 * Machine.Specifications 0.12.0
