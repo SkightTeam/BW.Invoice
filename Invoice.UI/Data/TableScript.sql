@@ -19,7 +19,7 @@
        CurrencyCode TEXT,
        TaxType TEXT,
        Organization_id INT,
-       constraint FK3F4E1C87202E3E8A foreign key (Organization_id) references "Organization"
+       constraint FK440AF165FF8C1353 foreign key (Organization_id) references "Organization"
     )
 
     create table "Balance" (
@@ -45,5 +45,5 @@
        PurchaseAccountCode TEXT,
        AccountNumber TEXT,
        Organization_id INT,
-       constraint FK402AA4EE202E3E8A foreign key (Organization_id) references "Organization"
+       constraint FKC42117E3FF8C1353 foreign key (Organization_id) references "Organization"
     )

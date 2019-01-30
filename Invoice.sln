@@ -3,20 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2046
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Invoice", "Invoice\Invoice.csproj", "{E61B7F20-40DB-40FE-8E16-C0A41A33B655}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Invoice", "Invoice\Invoice.csproj", "{E61B7F20-40DB-40FE-8E16-C0A41A33B655}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Invoice.UI", "Invoice.UI\Invoice.UI.csproj", "{A767EFED-6391-4F50-9BF0-48139BB456FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Invoice.UI", "Invoice.UI\Invoice.UI.csproj", "{A767EFED-6391-4F50-9BF0-48139BB456FB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B2913937-64D2-468F-BD62-16DDA52EE7B8}"
 	ProjectSection(SolutionItems) = preProject
 		Readme.md = Readme.md
+		the onion architecture.jpg = the onion architecture.jpg
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Invoice.Integration.Xero", "Invoice.Integration.Xero\Invoice.Integration.Xero.csproj", "{C869784B-5146-4A56-A604-A592C77AA347}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Invoice.Integration.Xero", "Invoice.Integration.Xero\Invoice.Integration.Xero.csproj", "{C869784B-5146-4A56-A604-A592C77AA347}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Invoice.Integration.Xero.Tests", "Invoice.Integration.Xero.Tests\Invoice.Integration.Xero.Tests.csproj", "{37652E3E-BAA9-4AAF-B58E-F1E678DF984D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Invoice.Integration.Xero.Tests", "Invoice.Integration.Xero.Tests\Invoice.Integration.Xero.Tests.csproj", "{37652E3E-BAA9-4AAF-B58E-F1E678DF984D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Invoice.Persistent.NHibernate", "Invoice.Persistent.NHibernate\Invoice.Persistent.NHibernate.csproj", "{BFF60D33-4A2A-41BB-A160-E197B8B17776}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Invoice.Persistent.NHibernate", "Invoice.Persistent.NHibernate\Invoice.Persistent.NHibernate.csproj", "{BFF60D33-4A2A-41BB-A160-E197B8B17776}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
