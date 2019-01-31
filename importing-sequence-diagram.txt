@@ -1,0 +1,56 @@
+title Importing Sequence Diagram
+
+actor client
+participantgroup #lightblue **Invoice.UI**
+control HomeController
+end
+
+participantgroup #lightblue **Invoice**
+participant AuthenticatorFacade
+participant ImportService
+participant ExternalRepository
+participant Repository
+participant Vendor
+participant Account
+end
+
+participantgroup #lightpink **3rd Party**
+participant Xero
+participant IMapper
+end 
+
+
+client -> HomeController:connect()
+HomeController -> AuthenticatorFacade:GetRequestTokenAuthorizeUrl()
+
+HomeController<--AuthenticatorFacade:Redirect(Xero Login Page)
+
+client -> Xero: login()
+
+client<-- Xero: redirect(Authorize Url)
+client -> HomeController: Authorize(oauth_token, oauth_verifier, org)
+client ->HomeController: import()
+HomeController -> ImportService: importVendors()
+ImportService -> ExternalRepository : Get(getCurrentOrganization)
+ImportService <--ExternalRepository: Organization
+ImportService ->ExternalRepository : Search(searchVendorsInOrganization);
+ImportService <--ExternalRepository: IEnumerable<Vendor>
+ImportService ->ExternalRepository : Search(searchAccountsInOrganization);
+ImportService <--ExternalRepository: IEnumerable<Account>
+ImportService -> Repository : create(organization)
+
+loop #blue foreach externalVendor in IEnumerable<Vendor>
+ImportService -> *Vendor : new(Organization)
+ImportService <--  Vendor :vendor
+destroy Vendor
+ImportService -> IMapper: map(externalVendor, vendor)
+ImportService ->Repository : create(vendor)
+end 
+
+loop #blue foreach externalAccount in IEnumerable<Vendor>
+ImportService -> *Account : new(Organization)
+ImportService <--  Account :account
+destroy Account
+ImportService -> IMapper: map(externalAccount, account)
+ImportService ->Repository : create(account)
+end 
