@@ -2,7 +2,7 @@
 ## Requirements
 The Vendors and Account are two important data points for Invoice Processing. 
 Instead of requiring manual entry/upload the Vendors' and Accounts' information by our clients, 
-it is great feature if we can directly import those data from the system which out clients already used.
+it is great feature if we can directly import those data from the system which our clients already used.
 The [Xero](https://www.xero.com/ca/) is the first specific platform which we are looking a and integreting in this project.
 
 This current version built the main frame of the system 
@@ -41,7 +41,7 @@ which the application require your authorization to access your Xero data.
 5. To choose the organization which you want import data and click `Allow access for 30 mins`
 6. You will be redirected back to the application site, and see message `Authorization success`
 7. To click `Import Vendors/Accounts`, will import Organization, Vendors, Accounts into database.
-8. To check database on published folder `/Data/Invoice.sqlite to see if the data imported or not 
+8. To check database on published folder `/Data/Invoice.sqlite` to see if the data imported or not 
 
 ![Importing Sequence Diagram](importing-sequence-diagram.png)
 
