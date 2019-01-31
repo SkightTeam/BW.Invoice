@@ -96,8 +96,9 @@ even implemented by other party platform than Xero at all.
 ## Development Instruction
 ### Work from Source Code
 1. To clone source code from github: git clone https://github.com/SkightTeam/BW.Invoice.git
-2. To set Inovice.UI as start up project if it is not yet.
-3. To complie and run from local and then follow the application guide.
+2. To open the Invoice.sln in Visual Studio 2017 or later
+3. To set Inovice.UI as start up project if it is not yet.
+4. To complie and run from local and then follow the application guide.
 
 ### Naming Convention
 This project used a different naming convention than "standard" C#
@@ -107,6 +108,7 @@ or specific provider name for multiple implementations.
 
 ### Dependencies List
 #### Main Project's Dependencies
+* .Net Core 2.1
 * Xero.Api.Core
 * Automapper 8.0.0
 * NHibernate 5.1.1 / Fluent NHibernate 2.1.2
@@ -118,4 +120,37 @@ or specific provider name for multiple implementations.
 * Machine.Specifications.Fakes 2.10.0
 * Machine.Specifications.Fakes.NSubstitute 2.10.0
 
-Also need install Resharper extension if want to run test from Resharper: machine.specifications.runner.resharper## Technology Debt### Test Coverage LowThe purpose of the first version is to set up main framework, so not wrote too many unit tests to cover all codes/paths. But the DI helped isolated pieces of code, that maked it easier to fullfill unit tests later### Duplicated Code in Public/Parnter AuthenticatorThe two classes have lots duplicated code, which came from Xero.Api two base authenticators design. It can be improved by rewrite Xero.Api authenticators's code.### UserId improper passed in XeroApiThe UserID has been passed through XeroCoreApi down to XeroHttpClient, and finally used to look up token in Token Store.The whole process is complicated and hidden behavior. Need improve by rework on XeroApi itself.### Hardcode Database configurationThe database configuration have been hard coded as Sqlite and `Data/invoice.sqlite` for first version.It can be easy to improve later### Importing duplicatedHaven't handled the duplicated record by check local repository if it existed before, that is catched by `TODO` in import service.### Display Imported DataFor sake of short time, the display imported the organizations, vendors and accounts are not impplemented yet.It will invovle define the abstract query object/interface and create NHibernate's implementations which is pretty straightforward.### TransactionThe transaction has not include in the implementation.
+Also need install Resharper extension if want to run test from Resharper: machine.specifications.runner.resharper
+
+## Technology Debt
+### Test Coverage Low
+The purpose of the first version is to set up main framework, 
+so not wrote too many unit tests to cover all codes/paths. 
+But the DI helped isolated pieces of code, 
+that maked it easier to fullfill unit tests later
+
+### Duplicated Code in Public/Parnter Authenticator
+The two classes have lots duplicated code, 
+which came from Xero.Api two base authenticators design. 
+It can be improved by rewrite Xero.Api authenticators's code.
+
+### UserId improper passed in XeroApi
+The UserID has been passed through XeroCoreApi down to XeroHttpClient, and finally used to look up token in Token Store.
+The whole process is complicated and hidden behavior. Need improve by rework on XeroApi itself.
+
+### Hardcode Database configuration
+The database configuration have been hard coded as Sqlite and `Data/invoice.sqlite` for first version.
+It can be easy to improve later
+
+### Importing duplicated
+Haven't handled the duplicated record by check local repository if it existed before, 
+that is catched by `TODO` in import service.
+
+### Display Imported Data
+For sake of short time, the display imported the organizations, vendors and accounts are not impplemented yet.
+It will invovle define the abstract query object/interface and create NHibernate's implementations which is 
+pretty straightforward.
+
+
+### Transaction
+The transaction has not include in the implementation.
