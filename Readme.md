@@ -31,7 +31,7 @@ and replace corresponding ones in `appsettings.json` in published folder in step
 7. To simplify the first version, the database have been hard coded as Sqlite and file location `{published-folder}/Data/Invoice.sqlite`
 
 
-## Application Guide
+## Importing Work Flow
 1. After deployed as above, when you navigate to the application website, 
 you will see the home page, and click the big blue button `Connect to Xero`
 2. You will be redirect to the Xero login page if you haven't logged in before
@@ -42,6 +42,8 @@ which the application require your authorization to access your Xero data.
 6. You will be redirected back to the application site, and see message `Authorization success`
 7. To click `Import Vendors/Accounts`, will import Organization, Vendors, Accounts into database.
 8. To check database on published folder `/Data/Invoice.sqlite to see if the data imported or not 
+
+![Importing Sequence Diagram](importing-sequence-diagram.png)
 
 ## Architecture and Design
 ### Brief Instroduction
